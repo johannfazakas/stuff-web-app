@@ -3,7 +3,7 @@ plugins {
     kotlin("plugin.serialization") version "1.7.10"
 }
 
-group = "ro.jf.sd"
+group = "ro.jf.stuff"
 version = "1.0-SNAPSHOT"
 
 repositories {

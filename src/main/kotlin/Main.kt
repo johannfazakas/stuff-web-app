@@ -9,7 +9,7 @@ fun main() {
     val container = document.getElementById("root") ?: error("Couldn't find root container!")
     createRoot(container).render(Fragment.create {
         h1 {
-            +"Welcome to the Social Diary! This is a React+Kotlin/JS app!"
+            +"Welcome to Stuff! Here you can manage your Stuff!... well, you name it! This is a React+Kotlin/JS app!"
         }
     })
 }

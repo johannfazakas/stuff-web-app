@@ -1,4 +1,4 @@
 # Project exclude paths
 /.gradle/
 /build/
-/build/js/packages/social-diary/kotlin/
+/build/js/packages/stuff/kotlin/
