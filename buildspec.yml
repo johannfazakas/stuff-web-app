@@ -20,3 +20,4 @@ artifacts:
     - appspec.yml
     - scripts/*
     - build/distributions/*
+  discard-paths: yes
