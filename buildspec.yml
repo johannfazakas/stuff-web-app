@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    AWS_ACCOUNT_ID: $$(aws sts get-caller-identity --query "Account" --output text)
+    AWS_ACCOUNT_ID: $(aws sts get-caller-identity --query "Account" --output text)
     AWS_ECR_REPOSITORY_NAME: stuff/web-app
 
 phases:
@@ -17,7 +17,7 @@ phases:
       # IMPROVE remove this echo once you see it works
       - echo "account is $AWS_ACCOUNT_ID and region is $AWS_REGION"
       - aws --version
-      - aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 572338991617.dkr.ecr.eu-central-1.amazonaws.com
+      - $(aws ecr get-login --no-include-email --region $AWS_REGION)
       - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_ECR_REPOSITORY_NAME
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
