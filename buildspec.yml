@@ -7,9 +7,7 @@ env:
 phases:
   install:
     runtime-versions:
-      nodejs: 16
-    commands:
-      - echo "installing something"
+      docker: 20
   pre_build:
     commands:
       - echo Logging to Amazon ECR
@@ -21,10 +19,10 @@ phases:
       - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_ECR_REPOSITORY_NAME
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
-      - echo "repository uri is $REPOSITORY_URI and image tag is $IMAGE_TAG"
+      - echo "repository uri is $REPOSITORY_URI and image tag is $IMAGE_TAG. commit hash is $COMMIT_HASH"
   build:
     commands:
-      - echo Build stated on `date`
+      - echo Build started on `date`
       - docker build -t 572338991617.dkr.ecr.eu-central-1.amazonaws.com/stuff/web-app:latest .
 #      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
