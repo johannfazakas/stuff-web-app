@@ -21,17 +21,19 @@ phases:
       - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_ECR_REPOSITORY_NAME
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - echo "repository uri is $REPOSITORY_URI and image tag is $IMAGE_TAG"
   build:
     commands:
       - echo Build stated on `date`
-      - docker build -t $REPOSITORY_URI:latest .
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - docker build -t 572338991617.dkr.ecr.eu-central-1.amazonaws.com/stuff/web-app:latest .
+#      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push $REPOSITORY_URI:latest
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - docker push 572338991617.dkr.ecr.eu-central-1.amazonaws.com/stuff/web-app:latest
+#      - docker push $REPOSITORY_URI:latest
+#      - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file
       - printf '[{"name":"%s","imageUri":"%s"}]' $AWS_ECR_REPOSITORY_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
