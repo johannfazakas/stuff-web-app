@@ -2,7 +2,6 @@ version: 0.2
 
 env:
   variables:
-    AWS_ACCOUNT_ID: $(aws sts get-caller-identity --query "Account" --output text)
     AWS_ECR_REPOSITORY_NAME: stuff/web-app
 
 phases:
@@ -15,6 +14,7 @@ phases:
     commands:
       - echo Logging to Amazon ECR
       # IMPROVE remove this echo once you see it works
+      - AWS_ACCOUNT_ID=`aws sts get-caller-identity --query "Account" --output text`
       - echo "account is $AWS_ACCOUNT_ID and region is $AWS_REGION"
       - aws --version
       - $(aws ecr get-login --no-include-email --region $AWS_REGION)
